@@ -647,6 +647,17 @@ const Laboratorio = {
 const FOR005 = {
     secs: [],
     nombres: "",
+    apellidos_paciente: "",
+    sexo: "",
+    nhcl: "",
+    numero_admision: "",
+    edad: "",
+    edad_paciente: "",
+    fecha_admision: "",
+    identificacion: "",
+    ubicacion: "",
+    fecha_alta: "",
+    medico_tratante: "",
     parseDoc: (_data) => {
 
         return Object.keys(_data.data).map(function (_v, _i, _contentData) {
@@ -654,8 +665,20 @@ const FOR005 = {
         })
 
     },
-    oncreate: () => {
-        FOR005.secs = [];
+    oninit: () => {
+        FOR005.nombres = "",
+            FOR005.apellidos_paciente = "",
+            FOR005.sexo = "",
+            FOR005.nhcl = "",
+            FOR005.numero_admision = "",
+            FOR005.edad = "",
+            FOR005.edad_paciente = "",
+            FOR005.fecha_admision = "",
+            FOR005.identificacion = "",
+            FOR005.ubicacion = "",
+            FOR005.fecha_alta = "",
+            FOR005.medico_tratante = "",
+            FOR005.secs = [];
         return Formulario.data.map(function (_v, _i, _contentData) {
             FOR005.parseDoc(Formulario.data[_i])
         })
@@ -1045,6 +1068,7 @@ const Formulario = {
             .then(function (result) {
                 if (result.length !== 0) {
                     Formulario.data = result;
+
                 } else {
                     Formulario.error = "El documento solicitado no esta disponible.";
                 }
@@ -1055,7 +1079,7 @@ const Formulario = {
 
             })
     },
-    oncreate: () => {
+    oninit: () => {
         Formulario.fetch();
     },
     view: () => {
@@ -1116,7 +1140,6 @@ const Evoluciones = {
 
             })
     },
-
     view: () => {
 
 
@@ -1190,7 +1213,7 @@ const WidgetsSV = {
         PS: [],
         TA: [],
     },
-    oncreate: () => {
+    oninit: () => {
         WidgetsSV.isData = 0;
         SignosVitales.data.map(function (_v, _i, _contentData) {
 
@@ -1612,8 +1635,14 @@ const DetallePaciente = {
 
     },
     fetch: () => {
+        Loader.show = "";
+        Loader.buttonShow = "";
         DetallePaciente.data = [];
         DetallePaciente.error = "";
+        Evoluciones.data = [];
+        Formulario.data = [];
+        Imagen.data = [];
+        SignosVitales.data = [];
         m.request({
             method: "POST",
             url: "https://api.hospitalmetropolitano.org/t/v1/status-paciente-emergencia",
@@ -1625,6 +1654,8 @@ const DetallePaciente = {
             },
         })
             .then(function (result) {
+                Loader.show = "d-none";
+                Loader.buttonShow = "d-none";
                 if (result.status) {
                     DetallePaciente.data = result.data;
                     DetallePaciente.loadPaciente();
@@ -1858,7 +1889,7 @@ const DetalleClinico = {
     editar: false,
     labelOperation: "Detalle:",
     inZoom: "",
-    oncreate: () => {
+    oninit: () => {
         MenuBoton.update = "SV";
         DetallePaciente.fetch();
     },
@@ -1930,6 +1961,7 @@ const Paciente = {
         Formulario.data = [];
         Imagen.data = [];
         SignosVitales.data = [];
+        FOR005.secs = [];
         if (!Auth.isLogin()) {
             return m.route.set('/auth');
         }
