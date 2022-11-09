@@ -54,6 +54,8 @@ const Auth = {
 
                 if (data.status) {
                     window.localStorage.accessToken = data.jwt;
+                    window.localStorage.appUser = Auth.username;
+
 
                     Auth.setSuccess('Bienvenido');
                     setTimeout(function () {
@@ -62,7 +64,6 @@ const Auth = {
                         Auth.statusError = "warning";
                         Auth.messageError = "";
                         Auth.username = "";
-                        Auth.password = "";
                         Auth.rol = parseInt(data.data.user.rol);
                         Auth.codMedico = data.data.user.codMedico;
                         App.isAuth()

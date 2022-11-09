@@ -11,6 +11,7 @@ import ResultadoPaciente from '../views/paciente/resultadosPaciente';
 
 import MiPerfil from '../views/perfil/perfil';
 import _404 from '../views/404'
+import Biblioteca from '../views/biblio/biblio';
 
 
 
@@ -22,6 +23,7 @@ const Routes = {
     '/inicio': Inicio, //Inicio
     '/auth': Login, // Login
     '/pacientes': Pacientes, // Pacientes
+    '/biblioteca': Biblioteca, // Biblioteca
     '/paciente/:nhc': Paciente, // Pacientes
     '/resultados': Resultados, // Resultados
     '/resultados/paciente/:nhc': ResultadoPaciente, // Resultados de Paciente

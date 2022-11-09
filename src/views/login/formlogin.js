@@ -52,11 +52,23 @@ const FormLogin = {
                                         "Entrar"
                                     )
                                 )
-                            ])
+                            ]),
+                            m("div.mt-4.text-center", [
+                                m("a.text-15", {
+                                    href: 'https://metropolitano.proactivanet.com/proactivanet/portal/ui/loginform/changePasswordAD.paw'
+                                },
+                                    "¿Recuperar contraseña?"
+                                )
+                            ]),
+
                         ),
 
 
-                    )
+
+
+
+                    ),
+
                 )
             ),
 
